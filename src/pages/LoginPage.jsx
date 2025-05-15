@@ -1,7 +1,7 @@
-// src/pages/LoginPage.jsx
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthForm from '../components/AuthForm'
+import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton'
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -95,6 +95,7 @@ const LoginPage = () => {
           className="object-cover w-full h-full"
         />
       </div>
+      <FloatingWhatsAppButton />
     </div>
   )
 }

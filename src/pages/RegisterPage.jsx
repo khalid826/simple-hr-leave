@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthForm from '../components/AuthForm'
+import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton'
 
 const RegisterPage = () => {
   const navigate = useNavigate()
@@ -94,7 +95,8 @@ const RegisterPage = () => {
           onBottomActionClick={() => navigate('/login')}
         />
       </div>
-
+      
+      <FloatingWhatsAppButton />
     </div>
   )
 }

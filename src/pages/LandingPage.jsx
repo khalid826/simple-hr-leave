@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import { FaWhatsapp } from 'react-icons/fa'
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -35,19 +36,20 @@ const LandingPage = () => {
               </button>
               <button
                 onClick={handleContactClick}
-                className="px-6 py-3 text-white transition duration-200 bg-green-500 rounded-lg shadow-md w-52 hover:bg-green-600"
+                className="flex items-center justify-center gap-2 px-6 py-4 text-white transition duration-200 bg-green-500 rounded-lg shadow-md w-52 hover:bg-green-600"
               >
-                Contact Us
+                <FaWhatsapp className="text-l" />
+                <span className="text-base leading-none">Learn More</span>
               </button>
             </div>
           </div>
 
           {/* Image section */}
-          <div className="w-full h-64 mb-6 md:w-1/2 md:h-full md:mb-0">
+          <div className="w-2/3 mb-6 aspect-square md:aspect-auto md:w-1/2 md:h-full md:mb-0">
             <img
               src="/src/assets/LandingPage.png"
               alt="Tool Preview"
-              className="object-cover w-full h-full rounded-md md:rounded-none"
+              className="object-contain w-full h-full rounded-md md:object-cover md:rounded-none"
             />
           </div>
         </div>
