@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -12,30 +12,30 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-yellow-50 flex flex-col">
+    <div className="flex flex-col min-h-screen bg-center bg-cover bg-yellow-50 bg-[url(/src/assets/BG.jpg)]">
       {/* Background for content */}
-      <div className="flex-grow flex items-center justify-center px-4">
-        <div className="flex flex-col-reverse md:flex-row items-center justify-center bg-white w-full px-6 py-20 max-w-6xl mx-auto rounded-xl shadow-lg">
+      <div className="flex items-center justify-center flex-grow px-4">
+        <div className="flex flex-col-reverse items-center justify-center w-full max-w-6xl px-6 py-20 mx-auto bg-white shadow-lg md:flex-row rounded-xl">
           
           {/* Content section */}
-          <div className="w-full md:w-1/2 p-6 md:p-12">
-            <h1 className="text-4xl font-bold text-orange-700 mb-6">
+          <div className="w-full p-6 md:w-1/2 md:p-12">
+            <h1 className="mb-6 text-4xl font-bold text-orange-700">
               Customizable Leave Approval Tool for Your Company
             </h1>
-            <p className="text-lg text-yellow-900 mb-8">
+            <p className="mb-8 text-lg text-yellow-900">
               A powerful tool for companies to manage leave requests, streamline HR workflows,
               and keep employees engaged with an easy-to-use system.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8">
+            <div className="flex flex-col items-center justify-center gap-4 mb-8 sm:flex-row sm:gap-4">
               <button
                 onClick={handleDemoClick}
-                className="bg-orange-500 text-white px-6 py-3 w-52 rounded-lg shadow-md hover:bg-orange-600 transition duration-200"
+                className="px-6 py-3 text-white transition duration-200 bg-orange-500 rounded-lg shadow-md w-52 hover:bg-orange-600"
               >
                 Try a Demo
               </button>
               <button
                 onClick={handleContactClick}
-                className="bg-yellow-500 text-white px-6 py-3 w-52 rounded-lg shadow-md hover:bg-yellow-600 transition duration-200"
+                className="px-6 py-3 text-white transition duration-200 bg-green-500 rounded-lg shadow-md w-52 hover:bg-green-600"
               >
                 Contact Us
               </button>
@@ -43,9 +43,9 @@ const LandingPage = () => {
           </div>
 
           {/* Image section */}
-          <div className="w-full md:w-1/2 h-64 md:h-full mb-6 md:mb-0">
+          <div className="w-full h-64 mb-6 md:w-1/2 md:h-full md:mb-0">
             <img
-              src="/src/assets/LandingPageBG.jpg"
+              src="/src/assets/LandingPage.png"
               alt="Tool Preview"
               className="object-cover w-full h-full rounded-md md:rounded-none"
             />
@@ -54,11 +54,11 @@ const LandingPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white text-center py-4 w-full">
+      <footer className="w-full py-4 text-center text-white bg-yellow-500">
         <p>&copy; 2025 Leave Approval Tool. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-export default LandingPage;
+export default LandingPage
