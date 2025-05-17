@@ -1,7 +1,8 @@
-// src/pages/RegisterPage.jsx
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 import AuthForm from '../components/AuthForm'
+import Loader from '../components/Loader'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton'
 
 const RegisterPage = () => {
@@ -9,35 +10,14 @@ const RegisterPage = () => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const { register, loading, message, setMessage } = useAuth()
 
   const isFormValid = email.trim() !== '' && password.trim() !== ''
 
-  const handleRegister = async (e) => {
+  const handleRegister = (e) => {
     e.preventDefault()
-    setMessage('')
-
-    try {
-      const res = await fetch('https://reqres.in/api/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'reqres-free-v1',
-        },
-        body: JSON.stringify({ email, password }),
-      })
-
-      const data = await res.json()
-
-      if (res.ok) {
-        setMessage('Registration successful! Redirecting to login...')
-        setTimeout(() => navigate('/login'), 1500)
-      } else {
-        setMessage(data.error || 'Registration failed. Check inputs.')
-      }
-    } catch {
-      setMessage('Network error, please try again later.')
-    }
+    if (!isFormValid) return
+    register(email, password)
   }
 
   useEffect(() => {
@@ -45,7 +25,7 @@ const RegisterPage = () => {
       const timer = setTimeout(() => setMessage(''), 5000)
       return () => clearTimeout(timer)
     }
-  }, [message])
+  }, [message, setMessage])
 
   return (
     <div className="relative flex min-h-screen md:flex-row">
@@ -58,7 +38,7 @@ const RegisterPage = () => {
           password={password}
           setPassword={setPassword}
           isFormValid={isFormValid}
-          message={message}
+          // message={message}
           onSubmit={handleRegister}
           submitLabel="Register"
           navigate={navigate}
@@ -66,6 +46,19 @@ const RegisterPage = () => {
           bottomActionText="Login"
           onBottomActionClick={() => navigate('/login')}
         />
+        {loading ? (
+          <Loader />
+        ) : (
+          message && (
+            <div
+              className={`mt-2 p-3 rounded shadow-md text-sm ${
+                message.includes('success') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}
+            >
+              {message}
+            </div>
+          )
+        )}
       </div>
 
       {/* Desktop BG image side */}
@@ -76,7 +69,7 @@ const RegisterPage = () => {
           className="object-cover w-full h-full"
         />
       </div>
-      
+
       {/* Desktop form with yellow bg */}
       <div className="flex-col items-center justify-center hidden w-full p-12 md:flex md:w-1/2 bg-yellow-50">
         <AuthForm
@@ -86,7 +79,7 @@ const RegisterPage = () => {
           password={password}
           setPassword={setPassword}
           isFormValid={isFormValid}
-          message={message}
+          // message={message}
           onSubmit={handleRegister}
           submitLabel="Register"
           navigate={navigate}
@@ -94,8 +87,21 @@ const RegisterPage = () => {
           bottomActionText="Login"
           onBottomActionClick={() => navigate('/login')}
         />
+        {loading ? (
+          <Loader />
+        ) : (
+          message && (
+            <div
+              className={`mt-2 p-3 rounded shadow-md text-sm ${
+                message.includes('success') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}
+            >
+              {message}
+            </div>
+          )
+        )}
       </div>
-      
+
       <FloatingWhatsAppButton />
     </div>
   )

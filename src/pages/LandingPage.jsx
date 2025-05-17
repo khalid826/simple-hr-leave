@@ -15,7 +15,7 @@ const LandingPage = () => {
   return (
     <div className="flex flex-col min-h-screen bg-center bg-cover bg-yellow-50 bg-[url(/src/assets/BG.jpg)]">
       {/* Background for content */}
-      <div className="flex items-center justify-center flex-grow px-4">
+      <div className="flex items-center justify-center flex-grow px-4 py-10">
         <div className="flex flex-col-reverse items-center justify-center w-full max-w-6xl px-6 py-20 mx-auto bg-white shadow-lg md:flex-row rounded-xl">
           
           {/* Content section */}

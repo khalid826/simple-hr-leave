@@ -5,7 +5,7 @@ const AuthForm = ({
   password,
   setPassword,
   isFormValid,
-  message,
+  // message,
   onSubmit,
   submitLabel,
   bottomText,
@@ -39,7 +39,7 @@ const AuthForm = ({
           {submitLabel}
         </button>
       </form>
-      {message && (
+      {/* {message && (
         <div
           className={`mt-2 p-3 rounded shadow-md text-sm ${
             message.includes('success') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
@@ -47,7 +47,7 @@ const AuthForm = ({
         >
           {message}
         </div>
-      )}
+      )} */}
       {bottomText && (
         <p className="mt-4 text-center text-yellow-900">
           {bottomText}{' '}

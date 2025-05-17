@@ -1,43 +1,23 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useAuth from '../hooks/useAuth'
 import AuthForm from '../components/AuthForm'
+import Loader from '../components/Loader'
 import FloatingWhatsAppButton from '../components/FloatingWhatsAppButton'
 
 const LoginPage = () => {
   const navigate = useNavigate()
-
+  
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('')
+  const { login, loading, message, setMessage } = useAuth()
 
   const isFormValid = email.trim() !== '' && password.trim() !== ''
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault()
-    setMessage('')
-
-    try {
-      const res = await fetch('https://reqres.in/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'reqres-free-v1',
-        },
-        body: JSON.stringify({ email, password }),
-      })
-
-      const data = await res.json()
-
-      if (res.ok) {
-        localStorage.setItem('token', data.token)
-        setMessage('Login successful! Redirecting...')
-        setTimeout(() => navigate('/dashboard'), 1000)
-      } else {
-        setMessage(data.error || 'Login failed. Check credentials.')
-      }
-    } catch {
-      setMessage('Network error, please try again later.')
-    }
+    if (!isFormValid) return
+    login(email, password)
   }
 
   useEffect(() => {
@@ -45,7 +25,7 @@ const LoginPage = () => {
       const timer = setTimeout(() => setMessage(''), 5000)
       return () => clearTimeout(timer)
     }
-  }, [message])
+  }, [message, setMessage])
 
   return (
     <div className="relative flex min-h-screen md:flex-row">
@@ -58,7 +38,7 @@ const LoginPage = () => {
           password={password}
           setPassword={setPassword}
           isFormValid={isFormValid}
-          message={message}
+          // message={message}
           onSubmit={handleLogin}
           submitLabel="Login"
           navigate={navigate}
@@ -66,6 +46,19 @@ const LoginPage = () => {
           bottomActionText="Get username"
           onBottomActionClick={() => navigate('/register')}
         />
+        {loading ? (
+          <Loader />
+        ) : (
+          message && (
+            <div
+              className={`mt-2 p-3 rounded shadow-md text-sm ${
+                message.includes('success') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}
+            >
+              {message}
+            </div>
+          )
+        )}
       </div>
 
       {/* Desktop form with yellow bg */}
@@ -77,7 +70,7 @@ const LoginPage = () => {
           password={password}
           setPassword={setPassword}
           isFormValid={isFormValid}
-          message={message}
+          // message={message}
           onSubmit={handleLogin}
           submitLabel="Login"
           navigate={navigate}
@@ -85,6 +78,19 @@ const LoginPage = () => {
           bottomActionText="Get username"
           onBottomActionClick={() => navigate('/register')}
         />
+        {loading ? (
+          <Loader />
+        ) : (
+          message && (
+            <div
+              className={`mt-2 p-3 rounded shadow-md text-sm ${
+                message.includes('success') ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+              }`}
+            >
+              {message}
+            </div>
+          )
+        )}
       </div>
 
       {/* Desktop BG image side */}
